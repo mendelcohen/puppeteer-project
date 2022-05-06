@@ -1,0 +1,22 @@
+{
+  "name": "puppeteer-project",
+  "version": "1.0.0",
+  "description": "Practice web scraping with puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "puppeteer-project"
+  },
+  "keywords": [
+    "Web",
+    "Scraping"
+  ],
+  "author": "Mendy Cohen",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^13.7.0"
+  }
+}
