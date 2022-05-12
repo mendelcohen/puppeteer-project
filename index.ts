@@ -8,7 +8,9 @@ export type scrubbedHardDrive = {
 }
 
 async function main() {
-  const items = await pullDataFromNewegg();
+  const products = await pullDataFromNewegg();
+  const items = products.items;
+  const images = products.images;
   const scrubbedItems: Array<scrubbedHardDrive> = await scrubData( items );
   console.log(scrubbedItems);
   await sendDataToDB( {scrubbedItems} );  
