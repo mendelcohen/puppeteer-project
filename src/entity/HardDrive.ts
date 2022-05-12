@@ -12,4 +12,7 @@ export class HardDrive {
     @Column()
     price: number
 
+    @Column( { nullable: true } )
+    image: string
+
 }

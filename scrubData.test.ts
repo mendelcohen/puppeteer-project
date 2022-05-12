@@ -48,12 +48,12 @@ describe('This describes the group of tests.', () => {
     const items: Array<hardDrive> = [{
       itemName: 'asd',
       itemDollars: '999',
-      itemCents: 'u',
+      itemCents: '',
     },
     {
       itemName: 'asd',
       itemDollars: '100',
-      itemCents: '00',
+      itemCents: 'g9',
     },
     {
       itemName: 'asd',
