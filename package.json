@@ -1,22 +1,40 @@
 {
-  "name": "puppeteer-project",
-  "version": "1.0.0",
-  "description": "Practice web scraping with puppeteer",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "puppeteer-project"
-  },
-  "keywords": [
-    "Web",
-    "Scraping"
-  ],
-  "author": "Mendy Cohen",
-  "license": "ISC",
-  "dependencies": {
-    "puppeteer": "^13.7.0"
-  }
+   "name": "puppeteer-project",
+   "version": "1.0.0",
+   "description": "Practice web scraping with puppeteer",
+   "main": "index.js",
+   "scripts": {
+      "test": "jest --coverage",
+      "test:watch": "jest --watch",
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "repository": {
+      "type": "git",
+      "url": "puppeteer-project"
+   },
+   "keywords": [
+      "Web",
+      "Scraping"
+   ],
+   "author": "Mendy Cohen",
+   "license": "ISC",
+   "dependencies": {
+      "@types/puppeteer": "^5.4.6",
+      "@types/web": "^0.0.64",
+      "dotenv": "^16.0.0",
+      "pg": "^8.4.0",
+      "puppeteer": "^13.7.0",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "0.3.6"
+   },
+   "devDependencies": {
+      "@types/jest": "^27.5.0",
+      "@types/node": "^16.11.33",
+      "jest": "^28.1.0",
+      "supertest": "^6.2.3",
+      "ts-jest": "^28.0.2",
+      "ts-node": "10.7.0",
+      "typescript": "4.5.2"
+   }
 }
