@@ -13,18 +13,20 @@ export default async function pullDataFromNewegg() {
   
   const parentDiv = '#app > div.page-content > section > div > div > div.row-body > div > div > div > div.row-body > div > div.list-wrap > div:nth-child(3) > div'
   
-  let products = await page.$$eval(parentDiv, (products: any[]) => 
+  const productInfo = await page.$$eval(parentDiv, (products: any[]) => 
     products.map((product) => {
+      let cents = product.querySelector('div > div.item-action > ul > li.price-current > sup').textContent
+      cents = cents.replace(/\./g, "")
       return {
         itemName: product.querySelector('div > div.item-info > a').textContent.trim(),
-        itemDollar: product.querySelector('div > div.item-info > a').textContent.trim(),
-        itemCents: product.querySelector('div > div.item-action > ul > li.price-current > sup').textContent.trim(),
+        itemDollars: product.querySelector('div > div.item-action > ul > li.price-current > strong').textContent,
+        itemCents: cents,
         image: product.querySelector('a > img').src
       } 
     })
   );
-  console.log(products);
-
+  // console.log(productInfo);
+  
   // let itemNames = await page.$$eval(parentDiv, (names: any[]) => {
   //   names = names.map(el => el.querySelector('div > div.item-info > a').textContent.trim())
   //   return names;
@@ -43,10 +45,10 @@ export default async function pullDataFromNewegg() {
   // });
   // console.log(itemCents);
   
-  let images = await page.$$eval(parentDiv, (imgs: any[]) => {
-    imgs = imgs.map(el => el.querySelector('a > img').src)
-    return imgs;
-  });
+  // let images = await page.$$eval(parentDiv, (imgs: any[]) => {
+  //   imgs = imgs.map(el => el.querySelector('a > img').src)
+  //   return imgs;
+  // });
   
   // const items = await page.evaluate(() => {
   //   // gets location of products on page
@@ -104,6 +106,6 @@ export default async function pullDataFromNewegg() {
   // console.log(items);
   await browser.close();
   
-  return { products };
+  return productInfo;
 }
-pullDataFromNewegg()
+// pullDataFromNewegg()

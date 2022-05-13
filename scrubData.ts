@@ -7,7 +7,7 @@ export type hardDrive = {
   image: string
 }
 
-export default function scrubData( products: hardDrive[] ) {
+export default function scrubData( products: Array<hardDrive> ) {
   const scrubbedItems: Array<scrubbedHardDrive> = products.map((product: hardDrive) => {
     let scrubbedDollars = (parseInt(product.itemDollars) * 100);
     let scrubbedCents  = parseInt(product.itemCents);
