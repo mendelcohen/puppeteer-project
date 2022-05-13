@@ -4,19 +4,21 @@ export type hardDrive = {
   itemName: string,
   itemDollars: string,
   itemCents: string,
+  image: string
 }
 
-export default function scrubData( items: hardDrive[] ) {
-  const scrubbedItems: Array<scrubbedHardDrive> = items.map((item: hardDrive) => {
-    let scrubbedDollars = (parseInt(item.itemDollars) * 100);
-    let scrubbedCents  = parseInt(item.itemCents);
+export default function scrubData( products: hardDrive[] ) {
+  const scrubbedItems: Array<scrubbedHardDrive> = products.map((product: hardDrive) => {
+    let scrubbedDollars = (parseInt(product.itemDollars) * 100);
+    let scrubbedCents  = parseInt(product.itemCents);
     const digits = /^\d+$/;
-    digits.test(item.itemDollars) === true ? scrubbedDollars : scrubbedDollars = 0;
-    digits.test(item.itemCents) === true ? scrubbedCents : scrubbedCents = 0;
+    digits.test(product.itemDollars) === true ? scrubbedDollars : scrubbedDollars = 0;
+    digits.test(product.itemCents) === true ? scrubbedCents : scrubbedCents = 0;
     const price = scrubbedDollars + scrubbedCents;
     return {
-      itemName: item.itemName,
-      price
+      itemName: product.itemName,
+      price,
+      image: product.image
     }
   });
   return scrubbedItems;
