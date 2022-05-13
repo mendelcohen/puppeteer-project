@@ -4,19 +4,37 @@ export default async function pullDataFromNewegg() {
   const browser = await puppeteer.launch({
     headless: false
   });
+  
   const page = await browser.newPage();
   await page.goto('https://newegg.com/p/pl?d=hard+drive', {
-    waitUntil: 'networkidle2',
+    waitUntil: 'load',
     timeout: 0
   });
+  
+  let itemNames = await page.$$eval(parentDiv, (names: any[]) => {
+    names = names.map(el => el.querySelector('div > div.item-info > a').textContent.trim())
+    return names;
+  });
+  console.log(itemNames);
+ 
+  let itemDollars = await page.$$eval(parentDiv, (dollars: any[]) => {
+    dollars = dollars.map(el => el.querySelector('div > div.item-action > ul > li.price-current > strong').textContent.trim())
+    return dollars;
+  });
+  console.log(itemDollars);
 
-  const parentDiv = '#app > div.page-content > section > div > div > div.row-body > div > div > div > div.row-body > div > div.list-wrap > div:nth-child(3) > div'
+  let itemCents = await page.$$eval(parentDiv, (cents: any[]) => {
+    cents = cents.map(el => el.querySelector('div > div.item-action > ul > li.price-current > sup').textContent.trim())
+    return cents;
+  });
+  console.log(itemCents);
+  
   let images = await page.$$eval(parentDiv, (imgs: any[]) => {
     imgs = imgs.map(el => el.querySelector('a > img').src)
     return imgs;
   });
-  // console.log(images)
-
+  console.log(images);
+  
   const items = await page.evaluate(() => {
     // gets location of products on page
     const parentDivSelector = '#app > div.page-content > section > div > div > div.row-body > div > div > div > div.row-body > div > div.list-wrap > div:nth-child(3)'
@@ -58,8 +76,8 @@ export default async function pullDataFromNewegg() {
         itemCentsElement = <HTMLElement> singleItemDiv.children[2].children[0].children[2].children[2]
       }
 
-      let imageSource = <HTMLElement> singleItemDiv.children[0].children[0];
-      console.log(imageSource)
+      // let imageSource = <HTMLElement> singleItemDiv.children[0].children[0];
+      // console.log(imageSource)
     
       // builds object for each product
       const itemName = itemNameElement.innerText;
@@ -70,8 +88,9 @@ export default async function pullDataFromNewegg() {
     })
     return products;
   })
-  await browser.close();
   // console.log(items);
+  await browser.close();
+  
   return { images, items };
 }
 pullDataFromNewegg()

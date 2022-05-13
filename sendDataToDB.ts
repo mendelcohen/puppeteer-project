@@ -8,10 +8,11 @@ export default async function sendDataToDB({ scrubbedItems }) {
     const drive: any = new HardDrive();
     drive.itemName = item.itemName
     drive.price = item.price
+    drive.image = item.image
     return drive;
   })
   await AppDataSource.manager.save(dbData)
-  console.log("Saved new users");
+  console.log("Saved new hard drives");
   await AppDataSource.destroy();
   return;
 }
