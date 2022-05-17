@@ -15,13 +15,19 @@ export default async function pullDataFromNewegg() {
   
   const productInfo = await page.$$eval(parentDiv, (products: any[]) => 
     products.map((product) => {
+      //removes decimal period from cents
       let cents = product.querySelector('div > div.item-action > ul > li.price-current > sup').textContent
       cents = cents.replace(/\./g, "")
+      // determines if product is a sponsored item or not
+      let sponsored = product.querySelector('div > div.item-sponsored-box')
+      sponsored === null? sponsored = false : sponsored = true;
+     
       return {
         itemName: product.querySelector('div > div.item-info > a').textContent.trim(),
         itemDollars: product.querySelector('div > div.item-action > ul > li.price-current > strong').textContent,
         itemCents: cents,
-        image: product.querySelector('a > img').src
+        image: product.querySelector('a > img').src,
+        isSponsored: sponsored
       } 
     })
   );
@@ -108,4 +114,4 @@ export default async function pullDataFromNewegg() {
   
   return productInfo;
 }
-// pullDataFromNewegg()
+//  pullDataFromNewegg()

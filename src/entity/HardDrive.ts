@@ -15,4 +15,7 @@ export class HardDrive {
     @Column( { nullable: true } )
     image: string
 
+    @Column( { nullable: true } )
+    isSponsored: boolean
+
 }

@@ -5,8 +5,9 @@ import sendDataToDB from "./sendDataToDB";
 
 export type scrubbedHardDrive = {
   itemName: string,
-  price: number
-  image: string
+  price: number,
+  image: string,
+  isSponsored: boolean
 }
 
 async function main() {

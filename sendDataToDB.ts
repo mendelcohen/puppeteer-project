@@ -9,6 +9,7 @@ export default async function sendDataToDB({ scrubbedItems }) {
     drive.itemName = item.itemName
     drive.price = item.price
     drive.image = item.image
+    drive.isSponsored = item.isSponsored
     return drive;
   })
   await AppDataSource.manager.save(dbData)
